@@ -3,6 +3,7 @@ package com.example.chatty;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -12,7 +13,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.chatty.Fragments.ChatsFragment;
 import com.example.chatty.Fragments.ProfileFragment;
 import com.example.chatty.Fragments.UsersFragment;
@@ -29,22 +32,35 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     DatabaseReference myRef;
-
-
+    CircleImageView profileImage ;
+    TextView username;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        profileImage =findViewById(R.id.profile_image);
+        username= findViewById(R.id.username);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        myRef = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        myRef = FirebaseDatabase.getInstance().getReference("MyUsers").child(firebaseUser.getUid());
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Users users = dataSnapshot.getValue(Users.class);
+                username.setText(users.getUsername());
+                if(users.getImageURL().equals("default")){
+                    profileImage.setImageResource(R.mipmap.ic_launcher);
+                }else{
+                    Glide.with(getApplicationContext()).load(users.getImageURL()).into(profileImage);
+                }
             }
 
             @Override

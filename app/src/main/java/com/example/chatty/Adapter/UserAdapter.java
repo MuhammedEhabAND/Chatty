@@ -2,6 +2,7 @@ package com.example.chatty.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +30,10 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import kotlin.reflect.KVisibility;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-
+    private CircleImageView isntseen;
     private Context context;
     private List<Users> mUsers;
     private Boolean isChat;
@@ -53,6 +55,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Users users = mUsers.get(position);
         holder.username.setText(users.getUsername());
+
         if (users.getImageURL().equals("default")) {
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
         } else {
@@ -109,6 +112,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             profile_image = itemView.findViewById(R.id.image);
             statusImageON = itemView.findViewById(R.id.img_on);
             statusImageOFF = itemView.findViewById(R.id.img_off);
+            isntseen = itemView.findViewById(R.id.isnt_seen);
             last_msg = itemView.findViewById(R.id.last_msg);
         }
     }
@@ -125,6 +129,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                     if (chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userid) ||
                             chat.getReceiver().equals(userid) && chat.getSender().equals(firebaseUser.getUid())) {
                         theLastMessage = chat.getMessage();
+                        if(!chat.isIsseen()){
+                            isntseen.setVisibility(View.VISIBLE);
+                            Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
+                            last_msg.setTypeface(boldTypeface);
+                        }
                     }
 
                 }
