@@ -45,12 +45,14 @@ import org.xml.sax.helpers.XMLFilterImpl;
 
 import java.util.HashMap;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragment extends Fragment {
 
     TextView textView;
-    ImageView imageView;
+    CircleImageView imageView;
     DatabaseReference reference;
     FirebaseUser fuser;
     StorageReference storageReference;

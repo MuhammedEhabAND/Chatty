@@ -3,12 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/ic_launcher_background"
         android:id="@+id/image"
         android:layout_margin="10dp"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:civ_border_width="10dp"
+        app:civ_border_color="#05df29"
+        android:id="@+id/img_on"
+        android:visibility="gone"
+        android:src="@mipmap/ic_launcher"
+        android:layout_below="@+id/username_item"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="-12dp"
+        android:layout_toRightOf="@+id/image"
+        android:layout_toEndOf="@+id/image"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:civ_border_width="10dp"
+        app:civ_border_color="#bfbfbf"
+        android:id="@+id/img_off"
+        android:visibility="gone"
+        android:src="@mipmap/ic_launcher"
+        android:layout_below="@+id/username_item"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="-12dp"
+        android:layout_toRightOf="@+id/image"
+        android:layout_toEndOf="@+id/image"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,22 +46,15 @@
         android:layout_toRightOf="@+id/image"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"/>
-
-    <ImageView
-        android:id="@+id/statusImage"
-        android:layout_width="13dp"
-        android:layout_height="13dp"
-
-        android:layout_alignBottom="@+id/image"
-        android:layout_marginBottom="105dp"
-        android:layout_toStartOf="@+id/image"
-        android:layout_toLeftOf="@+id/image"
-        app:layout_constraintBottom_toBottomOf="@+id/image"
-        app:layout_constraintEnd_toStartOf="@id/image"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintVertical_bias="0.653"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"
-        app:srcCompat="@drawable/background_right" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/username_item"
+        android:layout_toRightOf="@+id/image"
+        android:layout_marginTop="5dp"
+        android:paddingTop="5dp"
+        android:id="@+id/last_msg"
+        android:textColor="@color/purple_700"
+        android:layout_marginLeft="20dp"
+        android:maxLines="1"/>
 </RelativeLayout>

@@ -26,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
     private Context context;
@@ -90,13 +92,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView show_message;
-        public ImageView profile_image;
+        public CircleImageView profile_image;
+        public CircleImageView img_off , img_on;
         public TextView txt_seen;
         public ViewHolder(View itemView){
             super(itemView);
             show_message = itemView.findViewById(R.id.show_message);
             txt_seen = itemView.findViewById(R.id.txt_seen);
             profile_image = itemView.findViewById(R.id.profile_image);
+            img_off = itemView.findViewById(R.id.img_off);
+            img_on = itemView.findViewById(R.id.img_on);
 
 
         }

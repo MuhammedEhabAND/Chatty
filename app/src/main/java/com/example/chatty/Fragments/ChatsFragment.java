@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.chatty.Adapter.UserAdapter;
 import com.example.chatty.Model.Chatlist;
 import com.example.chatty.Model.Users;
+import com.example.chatty.Notification.Token;
 import com.example.chatty.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -70,10 +72,16 @@ public class ChatsFragment extends Fragment {
 
             }
         });
-
+        updateToken(FirebaseInstanceId.getInstance().getToken());
         return view;
     }
 
+    private void updateToken(String token ){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
+        Token token1 = new Token(token);
+        reference.child(fuser.getUid()).setValue(token1);
+
+    }
     private void chatlist() {
         mUsers =  new ArrayList<>();
         reference =  FirebaseDatabase.getInstance().getReference("MyUsers");

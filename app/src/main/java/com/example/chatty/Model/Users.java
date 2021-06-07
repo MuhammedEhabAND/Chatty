@@ -1,18 +1,26 @@
 package com.example.chatty.Model;
 
+import com.example.chatty.Adapter.UserAdapter;
+
 public class Users {
     private String id;
     private String username;
     private String imageURL;
     private String status ;
+    private String search;
     public Users(){}
 
-    public Users(String id, String username, String imageURL , String status) {
+    public Users(String id, String username, String imageURL , String status, String search) {
         this.id = id;
         this.username = username;
         this.imageURL = imageURL;
         this.status = status;
+        this.search = search;
     }
+
+    public String getSearch() { return search; }
+
+    public void setSearch(String search) { this.search = search; }
 
     public String getStatus() { return status; }
 
