@@ -52,7 +52,7 @@ import static android.app.Activity.RESULT_OK;
 public class ProfileFragment extends Fragment {
 
     TextView textView;
-    CircleImageView imageView;
+    ImageView imageView;
     DatabaseReference reference;
     FirebaseUser fuser;
     StorageReference storageReference;
@@ -75,7 +75,7 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         imageView = view.findViewById(R.id.profile_image2);
-        textView = view.findViewById(R.id.username);
+        textView = view.findViewById(R.id.tv_name);
 
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
