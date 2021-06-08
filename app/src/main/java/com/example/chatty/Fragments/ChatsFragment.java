@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,7 +52,13 @@ public class ChatsFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_chats ,container ,false);
         recyclerView = view.findViewById(R.id.rv_chat_list);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
+                ((LinearLayoutManager) layoutManager).getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         userslist = new ArrayList<>();
         reference = FirebaseDatabase.getInstance().getReference("ChatList").child(fuser.getUid());
